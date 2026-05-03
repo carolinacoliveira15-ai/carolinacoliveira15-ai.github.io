@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prompts e Passo a Passo de IA Aplicada · CCANDIDA Consultoria</title>
+<meta name="description" content="O kit prático para parar de improvisar com IA. Prompts prontos e passo a passo para aplicar agentes de IA no seu negócio." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --petrol:#005A6E;
+    --petrol-deep:#003C4A;
+    --mint:#46D6B2;
+    --gray-light:#E6E8E9;
+    --ink:#0E1A1F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Open Sans',system-ui,-apple-system,sans-serif;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(70,214,178,.18), transparent 60%),
+      radial-gradient(900px 500px at 50% 110%, rgba(0,90,110,.35), transparent 60%),
+      linear-gradient(180deg, #061418 0%, #0B2329 50%, #0A1A1F 100%);
+    color:#EAF2F4;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:36px 22px 60px;
+  }
+  /* Top */
+  .top-bar{
+    text-align:center;margin-bottom:26px;
+  }
+  .brand{
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--mint);
+  }
+  /* Hero */
+  .hero{
+    text-align:center;
+    padding:30px 12px 18px;
+  }
+  .badge{
+    display:inline-block;
+    background:rgba(70,214,178,.14);
+    color:var(--mint);
+    font-family:'Poppins',sans-serif;
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    padding:6px 14px;
+    border-radius:50px;
+    margin-bottom:18px;
+    border:1px solid rgba(70,214,178,.3);
+  }
+  h1{
+    font-family:'Poppins',sans-serif;
+    font-size:36px;
+    font-weight:800;
+    line-height:1.15;
+    color:#fff;
+    letter-spacing:-.6px;
+    margin-bottom:16px;
+  }
+  h1 .accent{color:var(--mint)}
+  .lead{
+    font-size:16.5px;
+    color:#BFD2D6;
+    max-width:600px;
+    margin:0 auto 26px;
+  }
+  .cta-primary{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--mint);
+    color:#04282A;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    text-decoration:none;
+    padding:18px 28px;
+    border-radius:12px;
+    box-shadow:0 14px 32px rgba(70,214,178,.32);
+    transition:transform .18s ease, background .18s ease, box-shadow .18s ease;
+  }
+  .cta-primary:hover{
+    background:#5CE6C2;
+    transform:translateY(-2px);
+    box-shadow:0 18px 38px rgba(70,214,178,.42);
+  }
+  .micro{
+    display:block;
+    margin-top:12px;
+    font-size:12.5px;
+    color:#9DB4BA;
+  }
+
+  /* Sections */
+  section{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:18px;
+    padding:30px 26px;
+    margin:22px 0;
+    backdrop-filter:blur(8px);
+  }
+  section h2{
+    font-family:'Poppins',sans-serif;
+    font-size:22px;
+    font-weight:700;
+    color:#fff;
+    line-height:1.25;
+    margin-bottom:14px;
+    letter-spacing:-.3px;
+  }
+  section h2 .accent{color:var(--mint)}
+  section p{
+    color:#CFDDE0;
+    font-size:15px;
+    margin-bottom:12px;
+  }
+  section p:last-child{margin-bottom:0}
+
+  /* Pain list */
+  .pains{
+    list-style:none;
+    display:flex;flex-direction:column;gap:10px;
+    margin-top:14px;
+  }
+  .pains li{
+    display:flex;gap:12px;align-items:flex-start;
+    background:rgba(0,0,0,.18);
+    border-left:3px solid #FF6B6B;
+    padding:12px 16px;
+    border-radius:6px;
+    color:#DCE7EA;
+    font-size:14.5px;
+  }
+  .pains li::before{
+    content:"×";color:#FF6B6B;font-weight:700;font-size:18px;line-height:1;margin-top:2px;
+  }
+
+  /* Inclusos */
+  .items{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:18px;
+  }
+  .item{
+    background:rgba(70,214,178,.06);
+    border:1px solid rgba(70,214,178,.18);
+    border-radius:14px;
+    padding:18px;
+  }
+  .item .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:32px;height:32px;border-radius:50%;
+    background:var(--mint);color:#04282A;
+    font-family:'Poppins',sans-serif;font-weight:800;font-size:14px;
+    margin-bottom:10px;
+  }
+  .item h3{
+    font-family:'Poppins',sans-serif;
+    font-size:16px;font-weight:600;color:#fff;
+    margin-bottom:6px;line-height:1.3;
+  }
+  .item p{
+    font-size:13.5px;color:#A9BEC3;line-height:1.45;margin:0;
+  }
+  .item .value{
+    display:inline-block;
+    margin-top:10px;
+    font-family:'Poppins',sans-serif;
+    font-size:11.5px;
+    color:var(--mint);
+    background:rgba(70,214,178,.14);
+    padding:3px 8px;border-radius:6px;
+    letter-spacing:.5px;
+  }
+  @media (max-width:560px){
+    .items{grid-template-columns:1fr}
+    h1{font-size:28px}
+    section{padding:24px 20px}
+  }
+
+  /* Para quem é */
+  .for-who{
+    display:grid;grid-template-columns:1fr 1fr;gap:18px;
+    margin-top:14px;
+  }
+  .for-who .col{
+    background:rgba(0,0,0,.18);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    padding:18px;
+  }
+  .for-who h4{
+    font-family:'Poppins',sans-serif;font-size:13.5px;font-weight:700;
+    text-transform:uppercase;letter-spacing:1.5px;
+    margin-bottom:12px;
+  }
+  .for-who .yes h4{color:var(--mint)}
+  .for-who .no h4{color:#FF8B8B}
+  .for-who ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .for-who li{font-size:13.5px;color:#DCE7EA;display:flex;gap:8px;align-items:flex-start}
+  .for-who .yes li::before{content:"✓";color:var(--mint);font-weight:700}
+  .for-who .no li::before{content:"×";color:#FF8B8B;font-weight:700}
+  @media (max-width:560px){.for-who{grid-template-columns:1fr}}
+
+  /* Offer / price */
+  .offer{
+    background:linear-gradient(135deg, rgba(70,214,178,.14), rgba(0,90,110,.4));
+    border:1px solid rgba(70,214,178,.4);
+    text-align:center;
+    padding:36px 24px;
+  }
+  .offer .summary{
+    display:inline-block;
+    font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:700;
+    color:var(--mint);letter-spacing:2px;text-transform:uppercase;
+    background:rgba(70,214,178,.16);
+    padding:5px 12px;border-radius:50px;margin-bottom:14px;
+  }
+  .offer h2{margin-bottom:10px}
+  .price-box{
+    margin:24px 0;
+  }
+  .price-old{
+    font-size:14.5px;
+    color:#9DB4BA;
+    text-decoration:line-through;
+    margin-bottom:6px;
+  }
+  .price-now{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    color:#fff;
+    font-size:14px;
+  }
+  .price-now .currency{font-size:18px;color:var(--mint);vertical-align:top;margin-right:2px;font-weight:600}
+  .price-now .val{font-size:48px;color:var(--mint);letter-spacing:-1px}
+  .price-now .or{display:block;font-size:13px;color:#BFD2D6;font-weight:400;margin-top:4px}
+  .price-now .install{font-size:14.5px;color:#fff;font-weight:600}
+  .guarantee{
+    display:inline-flex;align-items:center;gap:8px;
+    margin-top:8px;
+    background:rgba(0,0,0,.18);
+    color:#DCE7EA;
+    padding:8px 14px;border-radius:50px;
+    font-size:12.5px;border:1px solid rgba(255,255,255,.1);
+  }
+
+  /* Authority */
+  .author{
+    display:flex;gap:18px;align-items:center;
+  }
+  .author .photo{
+    width:78px;height:78px;border-radius:50%;
+    background:#0A2329;
+    border:2px solid rgba(70,214,178,.5);
+    flex-shrink:0;
+    overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Poppins',sans-serif;font-weight:700;font-size:28px;color:var(--mint);
+  }
+  .author .photo img{width:100%;height:100%;object-fit:cover}
+  .author .who{font-size:14px;color:#CFDDE0}
+  .author .who b{
+    font-family:'Poppins',sans-serif;font-weight:700;color:#fff;display:block;font-size:16px;margin-bottom:2px;
+  }
+
+  /* FAQ */
+  details.faq{
+    background:rgba(0,0,0,.18);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;
+    margin-bottom:10px;
+    padding:0 18px;
+    transition:border-color .15s ease;
+  }
+  details.faq[open]{border-color:rgba(70,214,178,.3)}
+  details.faq summary{
+    list-style:none;
+    cursor:pointer;
+    padding:14px 0;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    color:#fff;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{
+    content:"+";color:var(--mint);font-size:22px;line-height:1;transition:transform .2s ease;
+  }
+  details.faq[open] summary::after{transform:rotate(45deg)}
+  details.faq .answer{
+    padding:0 0 16px;
+    font-size:14px;color:#CFDDE0;line-height:1.55;
+  }
+
+  /* Final CTA */
+  .final-cta{
+    text-align:center;
+    padding:40px 24px;
+  }
+  .final-cta h2{font-size:26px;margin-bottom:12px}
+  .final-cta p{font-size:15px;margin-bottom:22px}
+
+  .footer-bar{
+    text-align:center;
+    margin-top:30px;
+    padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.06);
+    font-size:12px;
+    color:#6E848A;
+    letter-spacing:.5px;
+  }
+  .back{
+    display:inline-flex;align-items:center;gap:8px;
+    margin-top:18px;
+    color:#9DB4BA;
+    text-decoration:none;
+    font-size:13.5px;
+    font-family:'Poppins',sans-serif;
+  }
+  .back:hover{color:var(--mint)}
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="top-bar">
+      <span class="brand">CCANDIDA CONSULTORIA</span>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" style="background:none;border:none;padding:30px 12px 20px">
+      <span class="badge">Material aplicado · acesso imediato</span>
+      <h1>Pare de improvisar com IA.<br><span class="accent">Comece a usar do jeito certo.</span></h1>
+      <p class="lead">O kit prático com prompts prontos e passo a passo para aplicar agentes de IA na rotina do seu negócio. Sem teoria, sem enrolação técnica, sem ficar dependente de quem entende.</p>
+      <a class="cta-primary" href="#oferta">
+        Quero o kit completo →
+      </a>
+      <span class="micro">Acesso liberado em até 5 minutos · pagamento seguro</span>
+    </section>
+
+    <!-- Dor -->
+    <section>
+      <h2>Se algum desses pontos é real para você, esse material vai te economizar semanas de tentativa e erro:</h2>
+      <ul class="pains">
+        <li>Você testa IA mas nunca chega num resultado consistente — toda resposta sai diferente.</li>
+        <li>Sabe que automação economizaria horas, mas não sabe por onde começar.</li>
+        <li>Já assinou ferramenta cara e usa 10% do potencial.</li>
+        <li>Sua equipe perde tempo refazendo tarefas que IA poderia entregar prontas.</li>
+        <li>Você quer parar de criar conteúdo no improviso e ter postagem que posiciona de fato.</li>
+      </ul>
+    </section>
+
+    <!-- O que está incluído -->
+    <section id="oferta">
+      <span class="badge" style="margin-bottom:8px">O que você recebe</span>
+      <h2>Tudo pronto para aplicar <span class="accent">hoje</span> no seu negócio.</h2>
+      <p>Você não recebe um curso longo nem um e-book genérico. Recebe ativos prontos para uso com instruções claras de implementação.</p>
+
+      <div class="items">
+        <div class="item">
+          <div class="num">1</div>
+          <h3>Biblioteca de prompts profissionais</h3>
+          <p>Prompts testados e estruturados para uso em ChatGPT, Claude, Gemini e Perplexity, separados por área do negócio: comercial, atendimento, conteúdo, operação e gestão.</p>
+          <span class="value">Pronto para copiar e colar</span>
+        </div>
+        <div class="item">
+          <div class="num">2</div>
+          <h3>2 postagens estratégicas com roteiro completo</h3>
+          <p>Roteiros de postagem que posicionam você como autoridade, com estrutura testada de copy + sugestão de visual + CTA. Cole, ajuste e publique.</p>
+          <span class="value">Modelo replicável</span>
+        </div>
+        <div class="item">
+          <div class="num">3</div>
+          <h3>Passo a passo para criar agentes de IA</h3>
+          <p>Tutorial visual mostrando como configurar agentes para tarefas reais do seu negócio (responder leads, qualificar, fazer follow-up, gerar relatório).</p>
+          <span class="value">Implementação guiada</span>
+        </div>
+        <div class="item">
+          <div class="num">4</div>
+          <h3>Mapa de aplicações por área</h3>
+          <p>Guia visual mostrando onde cada tipo de IA gera mais retorno na operação. Você descobre o que automatizar primeiro e o que deixar para depois.</p>
+          <span class="value">Decisão com clareza</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Para quem é / não é -->
+    <section>
+      <h2>Para quem esse material foi feito.</h2>
+      <p>Sou direta sobre quem é cliente e quem não é. Isso evita expectativa errada e garante que você compre o que realmente vai usar.</p>
+
+      <div class="for-who">
+        <div class="col yes">
+          <h4>É pra você se</h4>
+          <ul>
+            <li>Você é dono, sócio ou gestor de PME e quer ganhar tempo na operação</li>
+            <li>Quer aplicar IA com critério, não na base do achismo</li>
+            <li>Prefere material direto, aplicável, sem encheção de linguiça</li>
+            <li>Quer entregar mais sem precisar contratar mais gente</li>
+            <li>Precisa começar a postar conteúdo de autoridade sem virar criador de conteúdo</li>
+          </ul>
+        </div>
+        <div class="col no">
+          <h4>Não é pra você se</h4>
+          <ul>
+            <li>Você quer um curso teórico longo sobre IA</li>
+            <li>Está procurando atalho mágico sem implementação</li>
+            <li>Não pretende dedicar nem 2 horas para aplicar</li>
+            <li>Espera que a IA faça tudo sem precisar de critério</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Autoridade -->
+    <section>
+      <div class="author">
+        <div class="photo"><img src="Foto_Carol_Candida.png" alt="Carol Cândida" onerror="this.parentElement.innerHTML='CC'"></div>
+        <div class="who">
+          <b>Carol Cândida</b>
+          ~20 anos em empresas de grande porte (energia, telecom, tecnologia) entre engenharia, gestão e transformação digital. Hoje à frente da CCANDIDA Consultoria, ajudando PMEs a operarem com mais clareza, controle e lucro através de processos e IA aplicada.
+        </div>
+      </div>
+    </section>
+
+    <!-- Oferta / preço -->
+    <section class="offer">
+      <span class="summary">Oferta de lançamento</span>
+      <h2>Acesso completo ao kit <span class="accent">CCANDIDA</span> de IA aplicada</h2>
+      <p style="max-width:520px;margin:0 auto">Tudo o que está acima, em um único pacote, com acesso imediato.</p>
+
+      <div class="price-box">
+        <div class="price-old">de R$ 297,00</div>
+        <div class="price-now">
+          <span class="currency">R$</span><span class="val">197</span>
+          <span class="or">à vista &nbsp;ou&nbsp; <span class="install">12x R$ 19,84</span></span>
+        </div>
+      </div>
+
+      <a class="cta-primary" href="#" id="btn-comprar">
+        Quero acesso agora →
+      </a>
+      <div style="margin-top:14px">
+        <span class="guarantee">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#46D6B2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Garantia de 7 dias · risco zero
+        </span>
+      </div>
+      <span class="micro">Pagamento seguro · acesso liberado em até 5 minutos</span>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <h2>Perguntas que você provavelmente tem.</h2>
+
+      <details class="faq">
+        <summary>Como recebo o material depois da compra?</summary>
+        <div class="answer">O acesso é liberado em até 5 minutos no e-mail cadastrado, com link direto para a área de membros. Você consulta de qualquer dispositivo, quantas vezes precisar.</div>
+      </details>
+
+      <details class="faq">
+        <summary>Funciona se eu nunca usei IA no trabalho?</summary>
+        <div class="answer">Sim. O passo a passo parte do zero, sem assumir conhecimento técnico. Você só precisa saber abrir o navegador e copiar/colar.</div>
+      </details>
+
+      <details class="faq">
+        <summary>Os prompts servem para qualquer ferramenta?</summary>
+        <div class="answer">Sim. Todos os prompts foram testados em ChatGPT, Claude, Gemini e Perplexity. O passo a passo mostra como ajustar para cada uma quando preciso.</div>
+      </details>
+
+      <details class="faq">
+        <summary>Tem suporte se eu travar em algo?</summary>
+        <div class="answer">Sim. Você tem acesso a um canal de dúvidas para tirar perguntas sobre aplicação durante os primeiros 30 dias.</div>
+      </details>
+
+      <details class="faq">
+        <summary>E se eu comprar e não gostar?</summary>
+        <div class="answer">Você tem 7 dias para testar. Se em qualquer momento desse prazo decidir que não é para você, devolvo 100% do valor sem perguntas.</div>
+      </details>
+
+      <details class="faq">
+        <summary>É melhor comprar isso ou contratar a consultoria direto?</summary>
+        <div class="answer">Depende do estágio. Esse kit resolve a aplicação prática para quem quer começar sozinho. Se a sua operação já é mais complexa e você precisa de diagnóstico personalizado e implementação, vale agendar uma conversa para avaliar a consultoria.</div>
+      </details>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta offer">
+      <h2>Comece a usar IA do jeito certo ainda hoje.</h2>
+      <p>Acesso imediato. Garantia de 7 dias. Risco zero pra você.</p>
+      <a class="cta-primary" href="#" id="btn-comprar-2">
+        Quero acesso agora →
+      </a>
+      <span class="micro">Dúvidas antes de comprar? <a href="https://wa.me/" style="color:#46D6B2;text-decoration:underline">Fale comigo no WhatsApp</a></span>
+    </section>
+
+    <div style="text-align:center">
+      <a class="back" href="bio-link-ccandida.html">← Voltar para a bio</a>
+    </div>
+
+    <div class="footer-bar">
+      <span style="font-family:'Poppins',sans-serif;font-weight:700;color:var(--mint);letter-spacing:2px">CCANDIDA</span> · Consultoria em eficiência operacional &amp; IA aplicada
+    </div>
+  </div>
+
+  <!--
+    Para wirar o checkout: substitua o href dos botões "btn-comprar" e
+    "btn-comprar-2" pelo link da Hotmart, Eduzz, Kiwify, Stripe Checkout
+    ou Pix gerado no seu provedor.
+  -->
+</body>
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Carol Cândida | Automação e Agentes de IA para Negócios</title>
+<meta name="description" content="Diagnóstico, automações e agentes de IA sob medida para PMEs de serviços. Mais tempo, mais lucro, menos retrabalho." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --petrol:#005A6E;
+    --petrol-deep:#003C4A;
+    --petrol-soft:#0A7387;
+    --mint:#46D6B2;
+    --mint-glow:rgba(70,214,178,.25);
+    --gray-light:#E6E8E9;
+    --ink:#0E1A1F;
+    --white:#FFFFFF;
+    --text:#1B2A30;
+    --text-soft:#4A5C63;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Open Sans',system-ui,-apple-system,sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(70,214,178,.18), transparent 60%),
+      radial-gradient(900px 500px at 50% 110%, rgba(0,90,110,.35), transparent 60%),
+      linear-gradient(180deg, #061418 0%, #0B2329 50%, #0A1A1F 100%);
+    color:#EAF2F4;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{
+    max-width:520px;
+    margin:0 auto;
+    padding:32px 22px 56px;
+  }
+  .hero{
+    text-align:center;
+    padding-top:8px;
+  }
+  .avatar{
+    width:128px;height:128px;border-radius:50%;
+    margin:0 auto 18px;
+    background:#0A2329;
+    border:2px solid rgba(70,214,178,.6);
+    box-shadow:0 0 0 6px rgba(70,214,178,.08), 0 18px 40px rgba(0,0,0,.4);
+    overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .avatar img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .avatar .fallback{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:42px;
+    color:var(--mint);
+    letter-spacing:-1px;
+  }
+  .brand{
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--mint);
+    margin-bottom:6px;
+  }
+  .name{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:22px;
+    color:#fff;
+    margin-bottom:4px;
+  }
+  .role{
+    font-size:14px;
+    color:#9DB4BA;
+    margin-bottom:26px;
+  }
+  h1.headline{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:28px;
+    line-height:1.2;
+    color:#fff;
+    margin:8px 0 14px;
+    letter-spacing:-.4px;
+  }
+  h1.headline .accent{color:var(--mint)}
+  .sub{
+    font-size:15.5px;
+    color:#BFD2D6;
+    max-width:440px;
+    margin:0 auto 28px;
+  }
+  .section{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:18px;
+    padding:22px 20px;
+    margin:18px 0;
+    backdrop-filter:blur(8px);
+  }
+  .section h2{
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--mint);
+    margin-bottom:14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .section h2::before{
+    content:"";
+    width:18px;height:2px;background:var(--mint);border-radius:2px;
+  }
+  /* Service cards (estilo cards verticais com ícone + tag + título + descrição + CTA) */
+  .services{
+    display:flex;flex-direction:column;gap:14px;
+    margin:18px 0;
+  }
+  .service{
+    display:flex;
+    background:linear-gradient(135deg, rgba(255,255,255,.045), rgba(70,214,178,.04));
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    overflow:hidden;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .service:hover{
+    transform:translateY(-2px);
+    border-color:rgba(70,214,178,.35);
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+  }
+  .service .ico-col{
+    flex-shrink:0;
+    width:78px;
+    background:linear-gradient(180deg, rgba(70,214,178,.14), rgba(0,90,110,.25));
+    border-right:1px solid rgba(70,214,178,.15);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:8px;
+    padding:14px 6px;
+  }
+  .service .ico-col svg{
+    width:30px;height:30px;color:var(--mint);
+  }
+  .service .ico-col .ico-label{
+    font-family:'Poppins',sans-serif;
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:1.4px;
+    color:var(--mint);
+    text-transform:uppercase;
+    text-align:center;
+    line-height:1.1;
+    opacity:.85;
+  }
+  .service .body{
+    flex:1;
+    padding:16px 18px;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .service .tag{
+    display:inline-block;
+    align-self:flex-start;
+    background:rgba(70,214,178,.14);
+    color:var(--mint);
+    font-family:'Poppins',sans-serif;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+    padding:4px 9px;
+    border-radius:6px;
+  }
+  .service h3{
+    font-family:'Poppins',sans-serif;
+    font-size:15.5px;
+    font-weight:600;
+    color:#fff;
+    line-height:1.3;
+  }
+  .service p{
+    font-size:13.5px;
+    color:#A9BEC3;
+    line-height:1.45;
+  }
+  .service .mini-cta{
+    margin-top:6px;
+    align-self:flex-start;
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--mint);
+    color:#04282A;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:12.5px;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .service .mini-cta:hover{background:#5CE6C2;transform:translateX(2px)}
+  .service .mini-cta .arr{font-size:14px;line-height:1}
+  @media (max-width:380px){
+    .service .ico-col{width:64px}
+    .service .body{padding:14px}
+  }
+  .benefits{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .benefit{
+    background:rgba(70,214,178,.06);
+    border:1px solid rgba(70,214,178,.18);
+    border-radius:12px;
+    padding:14px 12px;
+    font-size:13.5px;
+    color:#E5F2EE;
+    line-height:1.35;
+  }
+  .benefit b{
+    display:block;
+    color:var(--mint);
+    font-family:'Poppins',sans-serif;
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:4px;
+  }
+  .authority{
+    font-size:14.5px;
+    color:#CFDDE0;
+  }
+  .authority p{margin-bottom:10px}
+  .authority p:last-child{margin-bottom:0}
+  .authority .stamp{
+    display:inline-block;
+    background:rgba(70,214,178,.1);
+    color:var(--mint);
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:50px;
+    margin-right:6px;
+    margin-bottom:6px;
+  }
+  .cta-block{
+    background:linear-gradient(135deg, rgba(70,214,178,.14), rgba(0,90,110,.4));
+    border:1px solid rgba(70,214,178,.35);
+    border-radius:18px;
+    padding:22px 20px;
+    margin:22px 0 18px;
+    text-align:center;
+  }
+  .cta-block .label{
+    font-family:'Poppins',sans-serif;
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--mint);
+    margin-bottom:8px;
+  }
+  .cta-block h3{
+    font-family:'Poppins',sans-serif;
+    font-size:19px;
+    font-weight:700;
+    color:#fff;
+    line-height:1.3;
+    margin-bottom:8px;
+  }
+  .cta-block p{
+    font-size:14px;
+    color:#BFD2D6;
+  }
+  .buttons{
+    display:flex;flex-direction:column;gap:12px;
+    margin-top:20px;
+  }
+  .btn{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:14px;
+    padding:16px 20px;
+    border-radius:14px;
+    text-decoration:none;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:.2px;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    border:1px solid transparent;
+  }
+  .btn .arrow{
+    font-size:18px;
+    transition:transform .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn:hover .arrow{transform:translateX(4px)}
+  .btn-primary{
+    background:var(--mint);
+    color:#04282A;
+    box-shadow:0 10px 26px rgba(70,214,178,.28), 0 0 0 1px rgba(70,214,178,.6) inset;
+  }
+  .btn-primary:hover{
+    background:#5CE6C2;
+    box-shadow:0 14px 32px rgba(70,214,178,.4), 0 0 0 1px rgba(70,214,178,.8) inset;
+  }
+  .btn-secondary{
+    background:rgba(255,255,255,.04);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.12);
+  }
+  .btn-secondary:hover{
+    background:rgba(70,214,178,.08);
+    border-color:rgba(70,214,178,.4);
+  }
+  .btn .left{display:flex;align-items:center;gap:12px}
+  .btn .ico{
+    width:34px;height:34px;border-radius:10px;
+    background:rgba(0,0,0,.15);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .btn-primary .ico{background:rgba(0,0,0,.12)}
+  .btn .ico svg{width:18px;height:18px}
+  .btn .meta{
+    display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;
+  }
+  .btn .meta small{
+    font-family:'Open Sans',sans-serif;
+    font-weight:400;
+    font-size:11px;
+    opacity:.7;
+    margin-top:2px;
+    letter-spacing:0;
+  }
+  .footer{
+    text-align:center;
+    margin-top:34px;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.06);
+    font-size:12px;
+    color:#6E848A;
+    letter-spacing:.5px;
+  }
+  .footer .logo-mark{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    color:var(--mint);
+    letter-spacing:2px;
+  }
+  .pulse{
+    position:relative;
+  }
+  .pulse::after{
+    content:"";
+    position:absolute;top:14px;right:14px;
+    width:8px;height:8px;border-radius:50%;
+    background:var(--mint);
+    box-shadow:0 0 0 0 rgba(70,214,178,.7);
+    animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(70,214,178,.6)}
+    70%{box-shadow:0 0 0 12px rgba(70,214,178,0)}
+    100%{box-shadow:0 0 0 0 rgba(70,214,178,0)}
+  }
+  @media (max-width:420px){
+    .wrap{padding:24px 16px 48px}
+    h1.headline{font-size:25px}
+    .benefits{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="avatar">
+        <img src="Foto_Carol_Candida.png" alt="Carol Cândida" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'fallback\'>CC</span>'">
+      </div>
+      <div class="brand">CCANDIDA CONSULTORIA</div>
+      <div class="name">Carol Cândida</div>
+      <div class="role">Eficiência operacional · IA aplicada · Automação</div>
+
+      <h1 class="headline">
+        Sua operação rodando sozinha.<br>
+        <span class="accent">Você focado no que faz sua empresa crescer.</span>
+      </h1>
+      <p class="sub">
+        Diagnóstico, automações e agentes de IA sob medida para PMEs de serviços. Sem complicação técnica. Com retorno mensurável.
+      </p>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <div class="services">
+
+      <!-- Serviço 1 -->
+      <article class="service">
+        <div class="ico-col">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5h6L11 22l8.5-11.5h-6L13 2z"/></svg>
+          <span class="ico-label">IA · AUTO</span>
+        </div>
+        <div class="body">
+          <span class="tag">Implementação</span>
+          <h3>Automações e Agentes de IA no seu Negócio</h3>
+          <p>Implementação aplicada à sua operação real: menos retrabalho, menos dependência do dono, sem ferramenta cara. Você ganha tempo e sua equipe ganha foco.</p>
+          <a class="mini-cta" href="https://forms.gle/Ht3YcTnmhxF1wgYS6" target="_blank" rel="noopener">Quero implementar no meu negócio <span class="arr">→</span></a>
+        </div>
+      </article>
+
+      <!-- Serviço 2 -->
+      <article class="service">
+        <div class="ico-col">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/><circle cx="7" cy="15" r="1.4" fill="currentColor"/><circle cx="11" cy="11" r="1.4" fill="currentColor"/><circle cx="14" cy="14" r="1.4" fill="currentColor"/><circle cx="19" cy="8" r="1.4" fill="currentColor"/></svg>
+          <span class="ico-label">DIAG</span>
+        </div>
+        <div class="body">
+          <span class="tag">Diagnóstico</span>
+          <h3>Plano Personalizado de Automação com Estimativa de Retorno</h3>
+          <p>Mapeio onde automatizar primeiro, qual o impacto na sua operação e a estimativa de retorno antes de você investir um real. Decisão com clareza, não no achismo.</p>
+          <a class="mini-cta" href="https://calendly.com/carolinacoliveira15/nova-reuniao" target="_blank" rel="noopener">Quero meu diagnóstico <span class="arr">→</span></a>
+        </div>
+      </article>
+
+      <!-- Serviço 3 -->
+      <article class="service">
+        <div class="ico-col">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/></svg>
+          <span class="ico-label">PROMPTS</span>
+        </div>
+        <div class="body">
+          <span class="tag">Aplicação prática</span>
+          <h3>Prompts e Passo a Passo Prontos para Usar</h3>
+          <p>Você sai com material aplicável: 2 postagens estratégicas para o seu posicionamento e agentes de IA configurados para a rotina da sua operação.</p>
+          <a class="mini-cta" href="prompts-passo-a-passo.html">Quero acessar <span class="arr">→</span></a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- BENEFÍCIOS -->
+    <section class="section">
+      <h2>O que muda na prática</h2>
+      <div class="benefits">
+        <div class="benefit"><b>+ tempo</b>Horas devolvidas pra você e pra equipe toda semana.</div>
+        <div class="benefit"><b>+ lucro</b>Mais entregas com a mesma estrutura, sem aumentar custo.</div>
+        <div class="benefit"><b>+ controle</b>Processos rodando sem depender de ninguém específico.</div>
+        <div class="benefit"><b>− retrabalho</b>Tarefas repetitivas saem da mão de quem deveria estar vendendo.</div>
+      </div>
+    </section>
+
+    <!-- AUTORIDADE -->
+    <section class="section">
+      <h2>Por que comigo</h2>
+      <div class="authority">
+        <p>
+          <span class="stamp">+20 anos</span>
+          <span class="stamp">Energia · Telecom · Tech</span>
+          <span class="stamp">IA aplicada</span>
+        </p>
+        <p>
+          Trajetória em engenharia, gestão e transformação digital em empresas de grande porte. Hoje aplico essa visão para resolver problemas reais de PMEs de serviços com processos simples, ferramentas acessíveis e inteligência operacional.
+        </p>
+        <p style="color:#9DB4BA;font-size:13.5px">
+          Foco em resultado. Linguagem clara. Decisão baseada em dados.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-block pulse">
+      <div class="label">Próximo passo</div>
+      <h3>Descubra quais automações fazem sentido para o seu negócio agora.</h3>
+      <p>Agenda limitada por semana — para conversa, diagnóstico e plano de ação aplicável já na próxima semana.</p>
+    </section>
+
+    <!-- BOTÕES -->
+    <div class="buttons">
+      <a class="btn btn-primary" href="https://calendly.com/carolinacoliveira15/nova-reuniao" target="_blank" rel="noopener">
+        <span class="left">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </span>
+          <span class="meta">
+            Agendar diagnóstico
+            <small>Conversa de 30 min · sem compromisso</small>
+          </span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="btn btn-secondary" href="https://www.linkedin.com/in/carolcandida/" target="_blank" rel="noopener">
+        <span class="left">
+          <span class="ico" style="color:#46D6B2">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 11.01-4.13 2.06 2.06 0 01-.01 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </span>
+          <span class="meta">
+            LinkedIn
+            <small>/in/carolcandida</small>
+          </span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="btn btn-secondary" href="https://www.instagram.com/soucarolcandida/" target="_blank" rel="noopener">
+        <span class="left">
+          <span class="ico" style="color:#46D6B2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </span>
+          <span class="meta">
+            Instagram
+            <small>@soucarolcandida</small>
+          </span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="footer">
+      <span class="logo-mark">CCANDIDA</span> · Consultoria em eficiência operacional &amp; IA aplicada
+    </div>
+  </div>
+</body>
+</html>
